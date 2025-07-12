@@ -1,34 +1,18 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 export async function GET(req: Request) {
-  const username = req.url.split("/").pop();
+  const username = req.url.split("/")[req.url.split("/").length - 2];
   const query = `
   query getUserProfile($username: String!) {
-    matchedUser(username: $username) {
-      username
-      profile {
-        ranking
-        starRating
-        reputation
-      }
-      submitStats {
-        acSubmissionNum {
-          difficulty
-          count
-          submissions
-        }
-      }
-    }
-    userContestRanking(username: $username) {
-      attendedContestsCount
-      rating
-      globalRanking
-      totalParticipants
-      topPercentage
-      badge {
-        name
-      }
-    }
+   matchedUser(username:$username){
+   userCalendar{
+   activeYears,
+   streak,
+   totalActiveDays,
+   submissionCalendar
+   }
+   }
+    
   }
 `;
 
@@ -53,14 +37,14 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       status: 200,
-      message: "User data fetched successfully",
+      message: "User calendar data fetched successfully",
       data: response.data.data.matchedUser,
-      contestData: response.data.data.userContestRanking,
+      contestData: response.data.data.userCalendar,
     });
   } catch (err) {
     return NextResponse.json({
       status: 500,
-      message: "Failed to fetch user data",
+      message: "Failed to fetch user calendar data",
       error: err,
     });
   }
