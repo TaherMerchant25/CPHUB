@@ -1,33 +1,66 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
-import * as cheerio from "cheerio";
 export async function GET(req: Request) {
   const username = req.url.split("/").pop();
-  const url = `https://leetcode.com/u/${username}/`;
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
-  await page.goto(url, {
-    waitUntil: "networkidle0",
-  });
-  const content = await page.content();
-  const $ = cheerio.load(content);
-  const rating = $(
-    ".text-label-1.dark\\:text-dark-label-1.flex.items-center.text-2xl"
-  )
-    .text()
-    .trim();
+  const query = `
+  query getUserProfile($username: String!) {
+    matchedUser(username: $username) {
+      username
+      profile {
+        ranking
+        starRating
+        reputation
+      }
+      submitStats {
+        acSubmissionNum {
+          difficulty
+          count
+          submissions
+        }
+      }
+    }
+    userContestRanking(username: $username) {
+      attendedContestsCount
+      rating
+      globalRanking
+      totalParticipants
+      topPercentage
+      badge {
+        name
+      }
+    }
+  }
+`;
 
-  return NextResponse.json({
-    status: 200,
-    message: "User data fetched successfully",
-    rating: rating,
-  });
+  const variables = {
+    username,
+  };
+
   try {
+    const response = await fetch("https://leetcode.com/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    });
+
+    const data = await response.json();
+
+    return NextResponse.json({
+      status: 200,
+      message: "User data fetched successfully",
+      data: data.data.matchedUser,
+      contestData: data.data.userContestRanking,
+    });
   } catch (err) {
     return NextResponse.json({
-      status: 404,
-      message: "User not found",
-      err: err,
+      status: 500,
+      message: "Failed to fetch user data",
+      error: err,
     });
   }
 }
