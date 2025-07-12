@@ -1,27 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-interface TopicTag {
-  name: string;
-  id: string;
-  slug: string;
-}
-
-interface LeetCodeQuestion {
-  acRate: number;
-  difficulty: "Easy" | "Medium" | "Hard";
-  freqBar: number | null;
-  frontendQuestionId: string;
-  isFavor: boolean;
-  paidOnly: boolean;
-  status: string | null;
-  title: string;
-  titleSlug: string;
-  topicTags: TopicTag[];
-  hasSolution: boolean;
-  hasVideoSolution: boolean;
-}
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
@@ -120,14 +99,14 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       status: 200,
-      message: "Filtered questions fetched successfully",
+      message: "Questions fetched successfully",
       data: LeetCodeQuestions,
       total: LeetCodeQuestions.length,
     });
   } catch (err) {
     return NextResponse.json({
       status: 500,
-      message: "Failed to fetch filtered questions",
+      message: "Failed to fetch questions",
       error: err,
     });
   }
