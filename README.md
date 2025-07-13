@@ -199,4 +199,4 @@ The API implements rate limiting to ensure fair usage:
 
 
 
-Made with ❤️ by [YadlaMani](https://github.com/YadlaMani)
+Made with 💻 by [Mani](https://github.com/YadlaMani) and [Ananya](https://github.com/Ananya54321)
