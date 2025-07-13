@@ -1,16 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-interface codeforcesContest {
-  id: number;
-  name: string;
-  type: string;
-  phase: string;
-  frozen: boolean;
-  durationSeconds: number;
-  startTimeSeconds: string;
-  relativeTimeSeconds: string;
-}
 export async function GET() {
   try {
     const response = await axios.get(
