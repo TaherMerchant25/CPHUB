@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONValue[]
+  | { [key: string]: JSONValue };
 interface ApiRoute {
   route: string;
   description: string;
@@ -23,7 +30,7 @@ interface ApiResponse {
 
 interface ApiTestResult {
   status: number;
-  data: any;
+  data: JSONValue;
   error?: string;
 }
 
@@ -62,7 +69,7 @@ const APITestingArena = () => {
 
   const buildApiUrl = (route: string) => {
     let url = route;
-    
+
     // Replace route parameters with input values
     Object.entries(inputValues).forEach(([key, value]) => {
       if (key.startsWith("route_param_")) {
@@ -95,7 +102,7 @@ const APITestingArena = () => {
       const url = buildApiUrl(selectedApi);
       const response = await fetch(url);
       const data = await response.json();
-      
+
       setTestResult({
         status: response.status,
         data,
@@ -103,7 +110,7 @@ const APITestingArena = () => {
     } catch (error) {
       setTestResult({
         status: 500,
-        data: null,
+        data: JSON.stringify({}),
         error: error instanceof Error ? error.message : "Unknown error",
       });
     } finally {
@@ -111,18 +118,18 @@ const APITestingArena = () => {
     }
   };
 
-  const selectedRoute = apiRoutes.find(route => route.route === selectedApi);
+  const selectedRoute = apiRoutes.find((route) => route.route === selectedApi);
 
   const extractRouteParams = (route: string) => {
     const matches = route.match(/\[([^\]]+)\]/g);
-    return matches ? matches.map(match => match.slice(1, -1)) : [];
+    return matches ? matches.map((match) => match.slice(1, -1)) : [];
   };
 
   const renderInputFields = () => {
     if (!selectedRoute) return null;
 
     const routeParams = extractRouteParams(selectedRoute.route);
-    
+
     return (
       <div className="space-y-6">
         {/* Route Parameters Section */}
@@ -134,21 +141,28 @@ const APITestingArena = () => {
             <div className="space-y-4">
               {routeParams.map((param) => (
                 <div key={param} className="space-y-2">
-                  <label className="text-sm font-medium text-foreground" htmlFor={param}>
+                  <label
+                    className="text-sm font-medium text-foreground"
+                    htmlFor={param}
+                  >
                     {param} <span className="text-red-500">*</span>
                   </label>
                   <Input
                     id={param}
                     placeholder={`Enter ${param}`}
                     value={inputValues[`route_param_${param}`] || ""}
-                    onChange={(e) => handleInputChange(`route_param_${param}`, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(`route_param_${param}`, e.target.value)
+                    }
                     className="w-full"
                   />
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-foreground/60 py-2">No route parameters required</p>
+            <p className="text-sm text-foreground/60 py-2">
+              No route parameters required
+            </p>
           )}
         </div>
 
@@ -161,17 +175,24 @@ const APITestingArena = () => {
             <div className="space-y-4">
               {selectedRoute.filters.map((filter) => (
                 <div key={filter.name} className="space-y-2">
-                  <label className="text-sm font-medium text-foreground" htmlFor={filter.name}>
+                  <label
+                    className="text-sm font-medium text-foreground"
+                    htmlFor={filter.name}
+                  >
                     {filter.name}
                   </label>
                   <Input
                     id={filter.name}
                     placeholder={filter.example}
                     value={inputValues[`filter_${filter.name}`] || ""}
-                    onChange={(e) => handleInputChange(`filter_${filter.name}`, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(`filter_${filter.name}`, e.target.value)
+                    }
                     className="w-full"
                   />
-                  <p className="text-xs text-foreground/60 leading-relaxed">{filter.description}</p>
+                  <p className="text-xs text-foreground/60 leading-relaxed">
+                    {filter.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -180,9 +201,9 @@ const APITestingArena = () => {
 
         {/* Send Button */}
         <div className="pt-4 border-t border-border">
-          <Button 
-            onClick={testApi} 
-            disabled={loading} 
+          <Button
+            onClick={testApi}
+            disabled={loading}
             className="w-full h-12 text-base font-medium"
             size="lg"
           >
@@ -222,7 +243,9 @@ const APITestingArena = () => {
                     {apiRoutes.map((route) => (
                       <Button
                         key={route.route}
-                        variant={selectedApi === route.route ? "default" : "neutral"}
+                        variant={
+                          selectedApi === route.route ? "default" : "neutral"
+                        }
                         className="w-full justify-start text-left h-auto min-h-[4rem] p-4 group"
                         onClick={() => {
                           setSelectedApi(route.route);
@@ -255,7 +278,9 @@ const APITestingArena = () => {
                   {selectedApi ? (
                     <div className="space-y-6">
                       <div className="p-4 bg-secondary-background rounded-base border-2 border-border">
-                        <p className="text-sm font-mono break-all mb-2">{selectedApi}</p>
+                        <p className="text-sm font-mono break-all mb-2">
+                          {selectedApi}
+                        </p>
                         <p className="text-xs text-foreground/60 leading-relaxed">
                           {selectedRoute?.description}
                         </p>
@@ -264,8 +289,13 @@ const APITestingArena = () => {
                     </div>
                   ) : (
                     <div className="text-center py-12">
-                      <p className="text-foreground/60 mb-2">Select an API to get started</p>
-                      <p className="text-xs text-foreground/40">Choose an endpoint from the sidebar to configure and test</p>
+                      <p className="text-foreground/60 mb-2">
+                        Select an API to get started
+                      </p>
+                      <p className="text-xs text-foreground/40">
+                        Choose an endpoint from the sidebar to configure and
+                        test
+                      </p>
                     </div>
                   )}
                 </CardContent>
@@ -293,10 +323,12 @@ const APITestingArena = () => {
                           {testResult.status}
                         </span>
                       </div>
-                      
+
                       {testResult.error ? (
                         <div className="p-4 bg-red-50 border-2 border-red-300 rounded-base">
-                          <p className="text-sm text-red-800 break-words">{testResult.error}</p>
+                          <p className="text-sm text-red-800 break-words">
+                            {testResult.error}
+                          </p>
                         </div>
                       ) : (
                         <div className="p-4 bg-secondary-background border-2 border-border rounded-base">
@@ -308,8 +340,12 @@ const APITestingArena = () => {
                     </div>
                   ) : (
                     <div className="text-center py-12">
-                      <p className="text-foreground/60 mb-2">Response will appear here</p>
-                      <p className="text-xs text-foreground/40">Configure and send a request to see the API response</p>
+                      <p className="text-foreground/60 mb-2">
+                        Response will appear here
+                      </p>
+                      <p className="text-xs text-foreground/40">
+                        Configure and send a request to see the API response
+                      </p>
                     </div>
                   )}
                 </CardContent>
