@@ -18,3 +18,41 @@ interface LeetCodeQuestion {
   hasSolution: boolean;
   hasVideoSolution: boolean;
 }
+
+// CodeChef Types
+interface CodeChefProblem {
+  title: string;
+  problemCode: string;
+  difficulty: string;
+  tags?: string[];
+  successfulSubmissions?: string;
+  totalSubmissions?: string;
+  accuracy?: string;
+  contestName?: string;
+  url: string;
+}
+
+interface CodeChefContest {
+  name: string;
+  startDate: string;
+  endDate: string;
+  duration: string;
+  url: string;
+  status: "upcoming" | "running" | "ended";
+}
+
+interface CodeChefAPIContest {
+  contest_code: string;
+  contest_name: string;
+  contest_start_date: string;
+  contest_end_date: string;
+  contest_start_date_iso: string;
+  contest_end_date_iso: string;
+  contest_duration: string;
+  distinct_users: number;
+}
+
+interface Contest {
+  name: string;
+  problems?: string[];
+}
