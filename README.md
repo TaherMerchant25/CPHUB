@@ -1,31 +1,11 @@
-# 🚀 CP-API (Competitive Programming API)
+# 🚀 Hades (Competitive Programming API)
 
 A comprehensive Next.js-based REST API service that aggregates data from multiple competitive programming platforms, providing unified access to problems, contests, user statistics, and more.
 
 ## 📋 Overview
 
-CP-API is a centralized API service that fetches and serves data from popular competitive programming platforms including LeetCode, Codeforces, and CodeChef. It provides developers with a single endpoint to access programming challenges, contest information, user profiles, and submission histories across multiple platforms.
+Hades is a centralized API service that fetches and serves data from popular competitive programming platforms including LeetCode, Codeforces, and CodeChef. It provides developers with a single endpoint to access programming challenges, contest information, user profiles, and submission histories across multiple platforms.
 
-### ✨ Key Features
-
-- **Multi-Platform Support**: Access data from LeetCode, Codeforces, and CodeChef
-- **Unified Response Format**: Consistent JSON responses across all endpoints
-- **Real-time Data**: Fresh data fetched directly from platform APIs
-- **Comprehensive Filtering**: Advanced filtering options for problems and contests
-- **User Analytics**: Access user profiles, submission histories, and calendar data
-- **Rate Limiting**: Built-in rate limiting for API protection
-- **Modern Architecture**: Built with Next.js 15 and TypeScript
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 15 with App Router
-- **Language**: TypeScript
-- **HTTP Client**: Axios
-- **Web Scraping**: Puppeteer & Cheerio
-- **Rate Limiting**: Upstash Rate Limit with Vercel KV
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI
-- **Deployment**: Vercel
 
 ## 🚀 Getting Started
 
@@ -33,37 +13,6 @@ CP-API is a centralized API service that fetches and serves data from popular co
 
 - Node.js 18+
 - npm, yarn, pnpm, or bun
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/YadlaMani/hades.git
-cd cp-api
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
-
-3. Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📚 API Documentation
 
