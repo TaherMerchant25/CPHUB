@@ -19,7 +19,7 @@ interface LeetCodeQuestion {
   hasVideoSolution: boolean;
 }
 
-// CodeChef Types
+
 interface CodeChefProblem {
   title: string;
   problemCode: string;
@@ -55,4 +55,24 @@ interface CodeChefAPIContest {
 interface Contest {
   name: string;
   problems?: string[];
+}
+
+interface codeforcesContest {
+  id: number;
+  name: string;
+  type: string;
+  phase: string;
+  frozen: boolean;
+  durationSeconds: number;
+  startTimeSeconds: string;
+  relativeTimeSeconds: string;
+}
+
+interface codeforcesProblem {
+  contestId: number;
+  index: string;
+  name: string;
+  type: string;
+  points: number;
+  tags: string[];
 }
