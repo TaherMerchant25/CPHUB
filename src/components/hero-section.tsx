@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Github, ExternalLink, Code, Database, Zap } from "lucide-react";
+import { Github, ExternalLink, Code } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -26,43 +26,52 @@ const HeroSection = () => {
               Competitive
             </span>
             <br />
-            <span className="inline-block transform rotate-1">Programming</span>{" "}
+            <span className="inline-block transform rotate-1">
+              Programming
+            </span>{" "}
             <span className="inline-block bg-chart-1 text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform -rotate-1">
               APIs
             </span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-base">
-            The ultimate playground for testing CodeChef, Codeforces, and LeetCode APIs. 
-            Built for developers who love competitive programming.
+            The ultimate playground for testing CodeChef, Codeforces, and
+            LeetCode APIs. Built for developers who love competitive
+            programming.
           </p>
         </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/docs">
+          <Link href="https://github.com/YadlaMani/hades/blob/main/README.md">
             <Button size="lg" className="text-lg px-8 py-6">
               <ExternalLink className="mr-2" />
               View Documentation
             </Button>
           </Link>
-          
+
           <div className="flex gap-3">
-            <Link href="https://github.com/YadlaMani/hades" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://github.com/YadlaMani/hades"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Card className="p-4 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform cursor-pointer group">
                 <Github className="w-8 h-8 group-hover:scale-110 transition-transform" />
               </Card>
             </Link>
-            
-            <Link href="https://github.com/YadlaMani" target="_blank" rel="noopener noreferrer">
+
+            <Link
+              href="https://github.com/YadlaMani"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Card className="p-4 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform cursor-pointer group">
                 <Code className="w-8 h-8 group-hover:scale-110 transition-transform" />
               </Card>
             </Link>
           </div>
         </div>
-
-     
       </div>
     </div>
   );
