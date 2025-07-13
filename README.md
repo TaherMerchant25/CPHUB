@@ -6,20 +6,12 @@ A comprehensive Next.js-based REST API service that aggregates data from multipl
 
 Hades is a centralized API service that fetches and serves data from popular competitive programming platforms including LeetCode, Codeforces, and CodeChef. It provides developers with a single endpoint to access programming challenges, contest information, user profiles, and submission histories across multiple platforms.
 
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm, yarn, pnpm, or bun
-
 ## 📚 API Documentation
 
 ### Base URL
 
 ```
-https://your-domain.com/api
+https://hades.mani.works/api
 ```
 
 ### Response Format
@@ -198,53 +190,13 @@ _Note: CodeChef API endpoints are currently under development._
 
 The API implements rate limiting to ensure fair usage:
 
-- **Rate Limit**: 100 requests per minute per IP
-- **Headers**: Rate limit information is included in response headers
-- **Status Code**: `429` when rate limit is exceeded
+- **Rate Limit**: 10 requests per minute per IP
 
-## 🚀 Deployment
 
-### Deploy on Vercel
 
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Configure environment variables if needed
-4. Deploy automatically
 
-### Environment Variables
 
-Create a `.env.local` file for local development:
 
-```env
-# Add any required environment variables here
-KV_URL=your_kv_url
-KV_REST_API_URL=your_kv_rest_api_url
-KV_REST_API_TOKEN=your_kv_rest_api_token
-KV_REST_API_READ_ONLY_TOKEN=your_kv_rest_api_read_only_token
-```
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -m 'Add feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🔗 Links
-
-- [Live Demo](https://your-domain.com)
-- [GitHub Repository](https://github.com/YadlaMani/hades)
-- [API Documentation](https://your-domain.com/api)
-
-## 📞 Support
-
-For support, email [your-email@example.com] or open an issue on GitHub.
-
----
 
 Made with ❤️ by [YadlaMani](https://github.com/YadlaMani)
