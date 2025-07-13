@@ -11,7 +11,7 @@ Hades is a centralized API service that fetches and serves data from popular com
 ### Base URL
 
 ```
-https://hades.mani.works/api
+https://hades.strawhats.tech/api
 ```
 
 ### Response Format
@@ -60,13 +60,13 @@ GET /api/leetcode
 
 ```bash
 # Get user profile
-curl https://your-domain.com/api/leetcode/user/john_doe
+curl https://hades.strawhats.tech/api/leetcode/user/john_doe
 
 # Get easy array problems
-curl https://your-domain.com/api/leetcode/problems?difficulty=Easy&tags=array
+curl https://hades.strawhats.tech/api/leetcode/problems?difficulty=Easy&tags=array
 
 # Get problem of the day
-curl https://your-domain.com/api/leetcode/problems/potd
+curl https://hades.strawhats.tech/api/leetcode/problems/potd
 ```
 
 ## 🏆 Codeforces API Endpoints
@@ -98,16 +98,16 @@ GET /api/codeforces
 
 ```bash
 # Get user profile
-curl https://your-domain.com/api/codeforces/user/tourist
+curl https://hades.strawhats.tech/api/codeforces/user/tourist
 
 # Get all problems
-curl https://your-domain.com/api/codeforces/problems
+curl https://hades.strawhats.tech/api/codeforces/problems
 
 # Get specific problem from contest
-curl https://your-domain.com/api/codeforces/problems/1851?index=A
+curl https://hades.strawhats.tech/api/codeforces/problems/1851?index=A
 
 # Get upcoming contests
-curl https://your-domain.com/api/codeforces/contest/upcoming
+curl https://hades.strawhats.tech/api/codeforces/contest/upcoming
 ```
 
 ## 👨‍💻 CodeChef API Endpoints
@@ -120,11 +120,37 @@ Access the CodeChef API documentation:
 GET /api/codechef
 ```
 
-| Endpoint                        | Method | Description             | Status               |
-| ------------------------------- | ------ | ----------------------- | -------------------- |
-| `/api/codechef/user/[username]` | GET    | Fetch user profile data | 🚧 Under Development |
+| Endpoint                         | Method | Description                        | Parameters        |
+| -------------------------------- | ------ | ---------------------------------- | ----------------- |
+| `/api/codechef/user/[username]`  | GET    | Fetch user profile data            | `username` (path) |
+| `/api/codechef/problems`         | GET    | Fetch recent problems with filters | `limit`           |
+| `/api/codechef/problems/potd`    | GET    | Get Problem of the Day             | None              |
+| `/api/codechef/contest/upcoming` | GET    | Get upcoming and running contests  | None              |
 
-_Note: CodeChef API endpoints are currently under development._
+#### CodeChef Problems Filters
+
+| Filter  | Type   | Description                                         | Example     |
+| ------- | ------ | --------------------------------------------------- | ----------- |
+| `limit` | Number | Number of problems to fetch (default: 20, max: 100) | `?limit=50` |
+
+#### Example Usage
+
+```bash
+# Get user profile
+curl https://hades.strawhats.tech/api/codechef/user/gennady.korotkevich
+
+# Get recent problems (default 20)
+curl https://hades.strawhats.tech/api/codechef/problems
+
+# Get 50 recent problems
+curl https://hades.strawhats.tech/api/codechef/problems?limit=50
+
+# Get problem of the day
+curl https://hades.strawhats.tech/api/codechef/problems/potd
+
+# Get upcoming contests
+curl https://hades.strawhats.tech/api/codechef/contest/upcoming
+```
 
 ## 📊 Response Examples
 
@@ -182,6 +208,55 @@ _Note: CodeChef API endpoints are currently under development._
       "phase": "BEFORE"
     }
     // More contests...
+  ]
+}
+```
+
+### CodeChef User Profile Response
+
+```json
+{
+  "status": 200,
+  "message": "User data fetched successfully",
+  "data": {
+    "username": "gennady.korotkevich",
+    "country": "Belarus",
+    "problemSolved": "150",
+    "rating": {
+      "currentRatingNumber": "2500",
+      "ratingStar": "7★",
+      "highestRating": "2700",
+      "globalRank": "1",
+      "countryRank": "1"
+    },
+    "contests": [
+      {
+        "name": "Long Challenge",
+        "problems": ["PROBLEM1", "PROBLEM2", "PROBLEM3"]
+      }
+      // More contest data...
+    ]
+  }
+}
+```
+
+### CodeChef Problems Response
+
+```json
+{
+  "status": 200,
+  "message": "Problems fetched successfully",
+  "data": [
+    {
+      "id": "PROB001",
+      "code": "HELLO",
+      "name": "Life, the Universe, and Everything",
+      "difficulty": "Simple",
+      "totalSubmissions": "50000",
+      "successfulSubmissions": "35000",
+      "contestCode": "PRACTICE"
+    }
+    // More problems...
   ]
 }
 ```

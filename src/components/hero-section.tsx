@@ -4,9 +4,27 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Github, ExternalLink, Code } from "lucide-react";
-
+import { Github, ExternalLink, Code, Copy } from "lucide-react";
+import { toast } from "sonner";
+const apiEndpoints = [
+  {
+    label: "LeetCode",
+    url: "https://hades.strawhats.tech/api/leetcode",
+  },
+  {
+    label: "Codeforces",
+    url: "https://hades.strawhats.tech/api/codeforces",
+  },
+  {
+    label: "CodeChef",
+    url: "https://hades.strawhats.tech/api/codechef",
+  },
+];
 const HeroSection = () => {
+  const handleCopy = (url: string) => {
+    navigator.clipboard.writeText(url);
+    toast.success("API copied to clipboard!");
+  };
   return (
     <div className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-10">
       {/* Floating shapes for neobrutalism effect */}
@@ -21,7 +39,7 @@ const HeroSection = () => {
         {/* Main heading */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading leading-tight">
-            <span className="inline-block transform -rotate-1">Test</span>{" "}
+            <span className="inline-block transform -rotate-1">Unified</span>{" "}
             <span className="inline-block bg-main text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform rotate-1">
               Competitive
             </span>
@@ -30,13 +48,14 @@ const HeroSection = () => {
               Programming
             </span>{" "}
             <span className="inline-block bg-chart-1 text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform -rotate-1">
-              APIs
+              API
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-base">
-            The ultimate playground for testing CodeChef, Codeforces, and
-            LeetCode APIs. Built for developers who love competitive
+            Hades offers a single, powerful API to access profiles, contests,
+            problems, and submissions from LeetCode, Codeforces, and CodeChef
+            designed for developers who live and breathe competitive
             programming.
           </p>
         </div>
@@ -71,6 +90,22 @@ const HeroSection = () => {
               </Card>
             </Link>
           </div>
+        </div>
+        <div className="grid gap-4 pt-6">
+          {apiEndpoints.map((api) => (
+            <div
+              key={api.label}
+              className="flex items-center justify-between rounded-xl border bg-muted px-4 py-3 shadow-sm"
+            >
+              <span className="text-sm md:text-base font-mono truncate">
+                {api.url}
+              </span>
+              <Button size="sm" onClick={() => handleCopy(api.url)}>
+                <Copy className="w-4 h-4 mr-1" />
+                Copy
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
     </div>
