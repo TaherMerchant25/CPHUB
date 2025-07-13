@@ -18,3 +18,23 @@ interface LeetCodeQuestion {
   hasSolution: boolean;
   hasVideoSolution: boolean;
 }
+
+interface codeforcesContest {
+  id: number;
+  name: string;
+  type: string;
+  phase: string;
+  frozen: boolean;
+  durationSeconds: number;
+  startTimeSeconds: string;
+  relativeTimeSeconds: string;
+}
+
+interface codeforcesProblem {
+  contestId: number;
+  index: string;
+  name: string;
+  type: string;
+  points: number;
+  tags: string[];
+}
