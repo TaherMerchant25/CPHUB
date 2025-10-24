@@ -4,27 +4,21 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Github, ExternalLink, Code, Copy } from "lucide-react";
+import { Copy } from "lucide-react";
 import { toast } from "sonner";
+
 const apiEndpoints = [
-  {
-    label: "LeetCode",
-    url: "https://hades.strawhats.tech/api/leetcode",
-  },
-  {
-    label: "Codeforces",
-    url: "https://hades.strawhats.tech/api/codeforces",
-  },
-  {
-    label: "CodeChef",
-    url: "https://hades.strawhats.tech/api/codechef",
-  },
+  { label: "LeetCode", url: "/api/leetcode" },
+  { label: "Codeforces", url: "/api/codeforces" },
+  { label: "CodeChef", url: "/api/codechef" },
 ];
+
 const HeroSection = () => {
   const handleCopy = (url: string) => {
     navigator.clipboard.writeText(url);
     toast.success("API copied to clipboard!");
   };
+
   return (
     <div className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-10">
       {/* Floating shapes for neobrutalism effect */}
@@ -48,49 +42,18 @@ const HeroSection = () => {
               Programming
             </span>{" "}
             <span className="inline-block bg-chart-1 text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform -rotate-1">
-              API
+              Hub
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-base">
-            Hades offers a single, powerful API to access profiles, contests,
-            problems, and submissions from LeetCode, Codeforces, and CodeChef
-            designed for developers who live and breathe competitive
-            programming.
+            CPHUB is a competitive programming statistics website that lets you
+            explore profiles, contests, problems, and activity across LeetCode,
+            Codeforces, and CodeChef with a beautiful, unified interface.
           </p>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="https://github.com/YadlaMani/hades/blob/main/README.md">
-            <Button size="lg" className="text-lg px-8 py-6">
-              <ExternalLink className="mr-2" />
-              View Documentation
-            </Button>
-          </Link>
-
-          <div className="flex gap-3">
-            <Link
-              href="https://github.com/YadlaMani/hades"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Card className="p-4 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform cursor-pointer group">
-                <Github className="w-8 h-8 group-hover:scale-110 transition-transform" />
-              </Card>
-            </Link>
-
-            <Link
-              href="https://github.com/YadlaMani"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Card className="p-4 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform cursor-pointer group">
-                <Code className="w-8 h-8 group-hover:scale-110 transition-transform" />
-              </Card>
-            </Link>
-          </div>
-        </div>
+        {/* CTA Buttons and API endpoints */}
         <div className="grid gap-4 pt-6">
           {apiEndpoints.map((api) => (
             <div

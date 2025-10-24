@@ -1,5 +1,5 @@
 import HeroSection from "@/components/hero-section";
-import APITestingArena from "@/components/api-testing-arena";
+import StatsExplorer from "@/app/components/stats-explorer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Database, Zap, Code } from "lucide-react";
 
@@ -9,28 +9,7 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* API Testing Arena Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          
-          
-          <Card className="shadow-2xl border-4">
-            <CardHeader>
-              <CardTitle className="text-2xl font-heading text-center"> 
-            <h2 className="text-3xl md:text-4xl font-heading mb-4">
-              <span className="inline-block bg-main text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform -rotate-1">
-                API
-              </span>{" "}
-              <span className="inline-block transform rotate-1">Testing Arena</span>
-            </h2> 
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-8">
-              <APITestingArena />
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      <StatsExplorer />
 
       {/* Feature Highlights Section */}
       <section className="py-24 px-6">

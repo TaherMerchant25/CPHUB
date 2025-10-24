@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hades",
-  description: "Api's for Codechef, Codeforces,Leetcode and more",
+  title: "CPHUB",
+  description: "Unified stats for CodeChef, Codeforces, and LeetCode",
 };
 
 export default function RootLayout({

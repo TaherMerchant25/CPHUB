@@ -1,270 +1,176 @@
-# 🚀 Hades (Competitive Programming API)
+# CPHUB - Competitive Programming Hub
 
-A comprehensive Next.js-based REST API service that aggregates data from multiple competitive programming platforms, providing unified access to problems, contests, user statistics, and more.
+A comprehensive competitive programming statistics and tracking platform that provides:
+- **API Access**: Unified APIs for LeetCode, Codeforces, and CodeChef
+- **User Dashboard**: View detailed statistics from multiple platforms
+- **LeetCode Tracker**: Track and compare LeetCode progress across users
+- **Rankings**: Leaderboard of tracked users
 
-## 📋 Overview
+## 🚀 Features
 
-Hades is a centralized API service that fetches and serves data from popular competitive programming platforms including LeetCode, Codeforces, and CodeChef. It provides developers with a single endpoint to access programming challenges, contest information, user profiles, and submission histories across multiple platforms.
+### 1. Multi-Platform API
+Access user data from:
+- LeetCode (user stats, contests, problems, calendar)
+- Codeforces (user info, contests, problems)
+- CodeChef (user profile, contests, problems)
 
-## 📚 API Documentation
+### 2. Dashboard
+Search and view comprehensive statistics for any user across all platforms.
 
-### Base URL
+### 3. LeetCode Tracker
+- Add multiple users to track
+- Monitor problem-solving progress
+- Check who solved specific problems
+- Update all users' stats with one click
 
-```
-https://hades.strawhats.tech/api
-```
+### 4. Rankings
+- Leaderboard sorted by total problems solved
+- Visual difficulty breakdown (Easy/Medium/Hard)
+- Bulk import functionality
 
-### Response Format
+## 🛠️ Tech Stack
 
-All endpoints return a consistent JSON response format:
+- **Framework**: Next.js 15 (React 19)
+- **Styling**: TailwindCSS with Neobrutalism design
+- **Database**: Supabase (PostgreSQL)
+- **Deployment**: Vercel
+- **Web Scraping**: Cheerio
+- **UI Components**: Radix UI
 
-```json
-{
-  "status": 200,
-  "message": "Success message",
-  "data": {
-    // Response data
-  }
-}
-```
+## 📦 Installation
 
-## 🎯 LeetCode API Endpoints
-
-### Overview
-
-Access the LeetCode API documentation:
-
-```
-GET /api/leetcode
-```
-
-| Endpoint                                 | Method | Description                     | Parameters                                                     |
-| ---------------------------------------- | ------ | ------------------------------- | -------------------------------------------------------------- |
-| `/api/leetcode/user/[username]`          | GET    | Fetch user profile data         | `username` (path)                                              |
-| `/api/leetcode/problems`                 | GET    | Fetch all problems with filters | `difficulty`, `tags`, `category`, `frontendQuestionId`, `skip` |
-| `/api/leetcode/problems/potd`            | GET    | Get Problem of the Day          | None                                                           |
-| `/api/leetcode/user/[username]/calendar` | GET    | Get user submission calendar    | `username` (path)                                              |
-| `/api/leetcode/contest/upcoming`         | GET    | Get upcoming contests           | None                                                           |
-
-#### LeetCode Problems Filters
-
-| Filter               | Type          | Description                             | Example                                |
-| -------------------- | ------------- | --------------------------------------- | -------------------------------------- |
-| `difficulty`         | String        | Filter by difficulty level              | `?difficulty=Easy`                     |
-| `tags`               | String        | Filter by topic tags (multiple allowed) | `?tags=array&tags=dynamic-programming` |
-| `category`           | String        | Filter by category slug                 | `?category=algorithms`                 |
-| `frontendQuestionId` | String/Number | Search by question ID or title slug     | `?frontendQuestionId=two-sum`          |
-| `skip`               | Number        | Skip questions for pagination           | `?skip=100`                            |
-
-#### Example Usage
-
+1. Clone the repository:
 ```bash
-# Get user profile
-curl https://hades.strawhats.tech/api/leetcode/user/john_doe
-
-# Get easy array problems
-curl https://hades.strawhats.tech/api/leetcode/problems?difficulty=Easy&tags=array
-
-# Get problem of the day
-curl https://hades.strawhats.tech/api/leetcode/problems/potd
+git clone <your-repo-url>
+cd CompetitiveProgrammingDashboard
 ```
 
-## 🏆 Codeforces API Endpoints
-
-### Overview
-
-Access the Codeforces API documentation:
-
-```
-GET /api/codeforces
-```
-
-| Endpoint                                   | Method | Description                         | Parameters                          |
-| ------------------------------------------ | ------ | ----------------------------------- | ----------------------------------- |
-| `/api/codeforces/user/[username]`          | GET    | Fetch user profile data             | `username` (path)                   |
-| `/api/codeforces/problems`                 | GET    | Fetch all problems from problemset  | None                                |
-| `/api/codeforces/problems/[contestId]`     | GET    | Fetch specific problem from contest | `contestId` (path), `index` (query) |
-| `/api/codeforces/contest`                  | GET    | Fetch all contests                  | None                                |
-| `/api/codeforces/contest/upcoming`         | GET    | Fetch upcoming contests             | None                                |
-| `/api/codeforces/user/[username]/calendar` | GET    | Get user submission history         | `username` (path)                   |
-
-#### Codeforces Problem Filters
-
-| Filter  | Type   | Description                                  | Example    |
-| ------- | ------ | -------------------------------------------- | ---------- |
-| `index` | String | Problem index within contest (A, B, C, etc.) | `?index=A` |
-
-#### Example Usage
-
+2. Install dependencies:
 ```bash
-# Get user profile
-curl https://hades.strawhats.tech/api/codeforces/user/tourist
-
-# Get all problems
-curl https://hades.strawhats.tech/api/codeforces/problems
-
-# Get specific problem from contest
-curl https://hades.strawhats.tech/api/codeforces/problems/1851?index=A
-
-# Get upcoming contests
-curl https://hades.strawhats.tech/api/codeforces/contest/upcoming
+npm install
 ```
 
-## 👨‍💻 CodeChef API Endpoints
-
-### Overview
-
-Access the CodeChef API documentation:
-
-```
-GET /api/codechef
+3. Set up environment variables:
+Create a `.env.local` file in the root directory:
+```env
+SUPABASE_URL=your_supabase_url_here
+SUPABASE_KEY=your_supabase_anon_key_here
 ```
 
-| Endpoint                         | Method | Description                        | Parameters        |
-| -------------------------------- | ------ | ---------------------------------- | ----------------- |
-| `/api/codechef/user/[username]`  | GET    | Fetch user profile data            | `username` (path) |
-| `/api/codechef/problems`         | GET    | Fetch recent problems with filters | `limit`           |
-| `/api/codechef/problems/potd`    | GET    | Get Problem of the Day             | None              |
-| `/api/codechef/contest/upcoming` | GET    | Get upcoming and running contests  | None              |
+4. Set up Supabase Database:
+Run this SQL in your Supabase SQL editor:
 
-#### CodeChef Problems Filters
+```sql
+-- Create the users table
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    total INTEGER DEFAULT 0,
+    easy INTEGER DEFAULT 0,
+    medium INTEGER DEFAULT 0,
+    hard INTEGER DEFAULT 0,
+    questions TEXT[] DEFAULT '{}',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
 
-| Filter  | Type   | Description                                         | Example     |
-| ------- | ------ | --------------------------------------------------- | ----------- |
-| `limit` | Number | Number of problems to fetch (default: 20, max: 100) | `?limit=50` |
+-- Create index on username for faster lookups
+CREATE INDEX idx_users_username ON users(username);
 
-#### Example Usage
+-- Create function to update updated_at timestamp
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
 
+-- Create trigger to automatically update updated_at
+CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Enable Row Level Security
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+
+-- Create policy to allow all operations
+CREATE POLICY "Enable all access for authenticated users" ON users
+FOR ALL
+USING (true)
+WITH CHECK (true);
+```
+
+5. Run the development server:
 ```bash
-# Get user profile
-curl https://hades.strawhats.tech/api/codechef/user/gennady.korotkevich
-
-# Get recent problems (default 20)
-curl https://hades.strawhats.tech/api/codechef/problems
-
-# Get 50 recent problems
-curl https://hades.strawhats.tech/api/codechef/problems?limit=50
-
-# Get problem of the day
-curl https://hades.strawhats.tech/api/codechef/problems/potd
-
-# Get upcoming contests
-curl https://hades.strawhats.tech/api/codechef/contest/upcoming
+npm run dev
 ```
 
-## 📊 Response Examples
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### User Profile Response
+## 🌐 Deployment to Vercel
 
-```json
-{
-  "status": 200,
-  "message": "User data fetched successfully",
-  "data": {
-    "username": "john_doe",
-    "rating": 1543,
-    "rank": "Expert",
-    "submissions": 245,
-    "problems_solved": 180
-    // Platform-specific additional data
-  }
-}
-```
+1. Push your code to GitHub
 
-### Problems Response
+2. Import your repository to Vercel:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
 
-```json
-{
-  "status": 200,
-  "message": "Problems fetched successfully",
-  "data": {
-    "problems": [
-      {
-        "id": "1",
-        "title": "Two Sum",
-        "difficulty": "Easy",
-        "tags": ["array", "hash-table"],
-        "acceptance_rate": "49.5%"
-      }
-      // More problems...
-    ],
-    "total": 2500
-  }
-}
-```
+3. Configure environment variables in Vercel:
+   - Go to Project Settings → Environment Variables
+   - Add `SUPABASE_URL` and `SUPABASE_KEY`
 
-### Contest Response
+4. Deploy!
 
-```json
-{
-  "status": 200,
-  "message": "Contests fetched successfully",
-  "data": [
-    {
-      "id": 1851,
-      "name": "Codeforces Round #885",
-      "start_time": "2024-07-13T14:35:00Z",
-      "duration": 7200,
-      "phase": "BEFORE"
-    }
-    // More contests...
-  ]
-}
-```
+## 📚 API Endpoints
 
-### CodeChef User Profile Response
+### LeetCode
+- `/api/leetcode` - API documentation
+- `/api/leetcode/user/[username]` - User stats
+- `/api/leetcode/user/[username]/calendar` - Submission calendar
+- `/api/leetcode/user/[username]/recent-ac` - Recent accepted submissions
+- `/api/leetcode/contest/upcoming` - Upcoming contests
+- `/api/leetcode/problems` - All problems
+- `/api/leetcode/problems/potd` - Problem of the day
 
-```json
-{
-  "status": 200,
-  "message": "User data fetched successfully",
-  "data": {
-    "username": "gennady.korotkevich",
-    "country": "Belarus",
-    "problemSolved": "150",
-    "rating": {
-      "currentRatingNumber": "2500",
-      "ratingStar": "7★",
-      "highestRating": "2700",
-      "globalRank": "1",
-      "countryRank": "1"
-    },
-    "contests": [
-      {
-        "name": "Long Challenge",
-        "problems": ["PROBLEM1", "PROBLEM2", "PROBLEM3"]
-      }
-      // More contest data...
-    ]
-  }
-}
-```
+### Codeforces
+- `/api/codeforces` - API documentation
+- `/api/codeforces/user/[username]` - User info
+- `/api/codeforces/user/[username]/calendar` - Contest calendar
+- `/api/codeforces/contest` - Recent contests
+- `/api/codeforces/contest/upcoming` - Upcoming contests
+- `/api/codeforces/problems` - Problem list
+- `/api/codeforces/problems/[contestId]` - Problems by contest
 
-### CodeChef Problems Response
+### CodeChef
+- `/api/codechef` - API documentation
+- `/api/codechef/user/[username]` - User profile
+- `/api/codechef/contest/upcoming` - Upcoming contests
+- `/api/codechef/problems` - Problem list
 
-```json
-{
-  "status": 200,
-  "message": "Problems fetched successfully",
-  "data": [
-    {
-      "id": "PROB001",
-      "code": "HELLO",
-      "name": "Life, the Universe, and Everything",
-      "difficulty": "Simple",
-      "totalSubmissions": "50000",
-      "successfulSubmissions": "35000",
-      "contestCode": "PRACTICE"
-    }
-    // More problems...
-  ]
-}
-```
+### Tracker
+- `/api/tracker/users` - Get all tracked users
+- `/api/tracker/add` - Add a user (POST)
+- `/api/tracker/update` - Update all users
+- `/api/tracker/check/[question]` - Check who solved a question
+- `/api/tracker/users/[username]` - Get/Delete specific user
+- `/api/tracker/bulk-import` - Import multiple users (POST)
 
-## 🔒 Rate Limiting
+## 🎨 Pages
 
-The API implements rate limiting to ensure fair usage:
+- `/` - Home page with API explorer
+- `/dashboard` - Multi-platform user statistics
+- `/tracker` - LeetCode progress tracker
+- `/ranking` - User leaderboard
 
-- **Rate Limit**: 10 requests per minute per IP
+## 📝 License
 
-Made with 💻 by [Mani](https://github.com/YadlaMani) and [Ananya](https://github.com/Ananya54321)
+MIT
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+Made with ❤️ for competitive programmers
