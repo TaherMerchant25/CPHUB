@@ -18,8 +18,8 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2">
           <Button asChild variant="noShadow" size="sm" className="text-sm font-medium">
-            <Link href="/dashboard">
-              Dashboard
+            <Link href="/">
+              Home
             </Link>
           </Button>
           

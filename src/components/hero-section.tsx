@@ -4,21 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
-
-const apiEndpoints = [
-  { label: "LeetCode", url: "/api/leetcode" },
-  { label: "Codeforces", url: "/api/codeforces" },
-  { label: "CodeChef", url: "/api/codechef" },
-];
 
 const HeroSection = () => {
-  const handleCopy = (url: string) => {
-    navigator.clipboard.writeText(url);
-    toast.success("API copied to clipboard!");
-  };
-
   return (
     <div className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-10">
       {/* Floating shapes for neobrutalism effect */}
@@ -33,42 +20,38 @@ const HeroSection = () => {
         {/* Main heading */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading leading-tight">
-            <span className="inline-block transform -rotate-1">Unified</span>{" "}
+            <span className="inline-block transform -rotate-1">Welcome to</span>{" "}
             <span className="inline-block bg-main text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform rotate-1">
-              Competitive
+              CPHUB
             </span>
             <br />
             <span className="inline-block transform rotate-1">
-              Programming
+              Competitive
             </span>{" "}
             <span className="inline-block bg-chart-1 text-main-foreground px-4 py-2 border-2 border-border shadow-shadow transform -rotate-1">
-              Hub
+              Programming
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-base">
-            CPHUB is a competitive programming statistics website that lets you
-            explore profiles, contests, problems, and activity across LeetCode,
-            Codeforces, and CodeChef with a beautiful, unified interface.
+            A platform for students to measure and track their competitive programming stats 
+            across LeetCode, Codeforces, and CodeChef. Compare rankings, monitor progress, 
+            and stay motivated together!
           </p>
         </div>
 
-        {/* CTA Buttons and API endpoints */}
-        <div className="grid gap-4 pt-6">
-          {apiEndpoints.map((api) => (
-            <div
-              key={api.label}
-              className="flex items-center justify-between rounded-xl border bg-muted px-4 py-3 shadow-sm"
-            >
-              <span className="text-sm md:text-base font-mono truncate">
-                {api.url}
-              </span>
-              <Button size="sm" onClick={() => handleCopy(api.url)}>
-                <Copy className="w-4 h-4 mr-1" />
-                Copy
-              </Button>
-            </div>
-          ))}
+        {/* CTA Buttons */}
+        <div className="flex gap-4 justify-center pt-6">
+          <Button asChild size="lg" className="text-lg px-8">
+            <Link href="/ranking">
+              View Rankings
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="neutral" className="text-lg px-8">
+            <Link href="/tracker">
+              Track Progress
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

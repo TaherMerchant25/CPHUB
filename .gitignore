@@ -16,12 +16,21 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Env
+# Env - DO NOT COMMIT THESE!
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Sensitive Files - DO NOT COMMIT
+main.py
+index.html
+1.txt
+
+# Scripts with credentials
+scripts/import-users.mjs
+scripts/setup-database.mjs
 
 # Misc
 *.swp
