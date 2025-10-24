@@ -9,19 +9,5 @@
       "path": "/api/cron/update-rankings",
       "schedule": "0 */6 * * *"
     }
-  ],
-  "env": {
-    "SUPABASE_URL": {
-      "description": "Your Supabase project URL",
-      "value": ""
-    },
-    "SUPABASE_KEY": {
-      "description": "Your Supabase anon/public key",
-      "value": ""
-    },
-    "CRON_SECRET": {
-      "description": "Secret token for cron job authentication",
-      "value": ""
-    }
-  }
+  ]
 }
