@@ -18,6 +18,7 @@ export default function StatsExplorer() {
   const [type, setType] = useState<LcType | CfType | CcType>("profile");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any>(null);
 
   const fetchStats = async () => {
@@ -79,7 +80,7 @@ export default function StatsExplorer() {
   const TypeSelector = () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="w-44 justify-between">
+        <Button variant="neutral" className="w-44 justify-between">
           {String(type).toUpperCase()}
         </Button>
       </DropdownMenuTrigger>
@@ -135,6 +136,7 @@ export default function StatsExplorer() {
       const contest = data?.contestData;
       // difficulty keys can be 'Easy', 'Medium', 'Hard' (case-sensitive). Normalize.
       const acMap: Record<string, number> = {};
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (user?.submitStats?.acSubmissionNum || []).forEach((s: any) => {
         const key = String(s.difficulty || "").toLowerCase();
         if (key) acMap[key] = s.count;
@@ -178,6 +180,7 @@ export default function StatsExplorer() {
       const d = data?.data;
       const q = d?.question;
       const difficultyColor = q?.difficulty === "Easy" ? "bg-green-100 text-green-800 border-green-300" : q?.difficulty === "Medium" ? "bg-yellow-100 text-yellow-800 border-yellow-300" : "bg-red-100 text-red-800 border-red-300";
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const solved = Array.isArray((data as any)?.__recentAC) && (data as any).__recentAC.some((s: any) => s.titleSlug === q?.titleSlug);
       return (
         <Card className="p-5">
@@ -204,6 +207,7 @@ export default function StatsExplorer() {
                 )}
               </div>
               <div className="flex items-center gap-2 flex-wrap">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {(q?.topicTags || []).map((t: any) => (
                   <span key={t.slug} className="text-xs px-2 py-1 rounded-base border bg-secondary-background">{t.name}</span>
                 ))}
@@ -224,6 +228,7 @@ export default function StatsExplorer() {
       let totalSubs = 0;
       try {
         const obj = typeof calStr === "string" ? JSON.parse(calStr) : {};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         totalSubs = Object.values(obj).reduce((a: number, b: any) => a + Number(b || 0), 0);
       } catch {}
       const totalActiveDays = d?.userCalendar?.totalActiveDays || d?.totalActiveDays;
