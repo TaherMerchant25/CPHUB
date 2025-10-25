@@ -3,10 +3,11 @@ import { supabase } from '@/lib/supabase';
 
 export async function GET(
   request: Request,
-  { params }: { params: { question: string } }
+  { params }: { params: Promise<{ question: string }> }
 ) {
   try {
-    const question = decodeURIComponent(params.question);
+    const { question: questionParam } = await params;
+    const question = decodeURIComponent(questionParam);
     
     const { data: users, error } = await supabase
       .from('users')

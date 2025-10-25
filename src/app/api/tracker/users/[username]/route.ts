@@ -3,13 +3,14 @@ import { supabase } from '@/lib/supabase';
 
 export async function GET(
   request: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
   try {
+    const { username } = await params;
     const { data, error } = await supabase
       .from('users')
       .select('*')
-      .eq('username', params.username)
+      .eq('username', username)
       .single();
     
     if (error || !data) {
@@ -31,13 +32,14 @@ export async function GET(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
   try {
+    const { username } = await params;
     const { error } = await supabase
       .from('users')
       .delete()
-      .eq('username', params.username);
+      .eq('username', username);
     
     if (error) {
       throw error;
