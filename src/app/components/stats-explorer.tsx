@@ -250,6 +250,7 @@ export default function StatsExplorer() {
       const contests = data?.contests || [];
       return (
         <div className="grid gap-3 md:grid-cols-2">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {contests.map((c: any) => (
             <Card key={c.titleSlug} className="p-4">
               <CardTitle className="mb-1">{c.title}</CardTitle>
