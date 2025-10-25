@@ -1,6 +1,6 @@
 import HeroSection from "@/components/hero-section";
 import StatsExplorer from "@/app/components/stats-explorer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Trophy, TrendingUp, Users } from "lucide-react";
 
 export default function Home() {

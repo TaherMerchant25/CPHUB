@@ -17,8 +17,11 @@ interface FetchState<T> {
 export default function DashboardPage() {
   const [username, setUsername] = useState("");
   const [activePlatform, setActivePlatform] = useState<Platform>("leetcode");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [lc, setLc] = useState<FetchState<any>>({ loading: false, error: null, data: null });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [cf, setCf] = useState<FetchState<any>>({ loading: false, error: null, data: null });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [cc, setCc] = useState<FetchState<any>>({ loading: false, error: null, data: null });
 
   const handleSearch = async () => {

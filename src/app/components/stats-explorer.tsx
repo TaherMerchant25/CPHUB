@@ -260,6 +260,7 @@ export default function StatsExplorer() {
     if (type === "problems") {
       // Support both our normalized API shape { data: Question[] }
       // and any raw GraphQL-like nested shapes if they sneak through
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let list: any = data?.data;
       if (!Array.isArray(list)) {
         list = data?.data?.questions
@@ -267,9 +268,11 @@ export default function StatsExplorer() {
           || data?.data?.problemsetQuestionList?.questions
           || [];
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const questions: any[] = Array.isArray(list) ? list : [];
       return (
         <div className="grid gap-3 md:grid-cols-2">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {questions.slice(0, 20).map((q: any) => (
             <Card key={q.titleSlug} className="p-4">
               <CardTitle className="mb-2 flex items-center justify-between">
@@ -281,6 +284,7 @@ export default function StatsExplorer() {
               <CardContent>
                 <div className="text-sm mb-2">AC Rate: <span className="font-medium">{q.acRate ? `${q.acRate.toFixed?.(1) ?? q.acRate}%` : '-'}</span></div>
                 <div className="flex gap-2 flex-wrap">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {(q.topicTags || []).slice(0, 5).map((t: any) => (
                     <span key={t.slug} className="text-xs px-2 py-1 rounded-base border bg-secondary-background">{t.name}</span>
                   ))}
