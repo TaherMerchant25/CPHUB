@@ -30,7 +30,7 @@ export default function RankingPage() {
       const response = await fetch("/api/tracker/users");
       const data = await response.json();
       setUsers(data);
-    } catch (error) {
+    } catch {
       toast.error("Error fetching users");
     }
     setLoading(false);
@@ -71,7 +71,7 @@ export default function RankingPage() {
       }
       
       await fetchUsers();
-    } catch (error) {
+    } catch {
       toast.error("Error importing users");
     }
     setImporting(false);
@@ -133,7 +133,7 @@ export default function RankingPage() {
           <Card className="text-center py-12">
             <CardContent>
               <p className="text-foreground/70 mb-4">
-                No users found. Click "Import All Users" to load the rankings!
+                No users found. Click &quot;Import All Users&quot; to load the rankings!
               </p>
             </CardContent>
           </Card>

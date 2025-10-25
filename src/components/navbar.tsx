@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-import { VscGithub } from "react-icons/vsc";
 import { ModeToggle } from "./ui/mode-toggle";
 
 const Navbar = () => {

@@ -213,7 +213,7 @@ export default function LeetCodeTracker() {
               <Card className="bg-muted/50">
                 <CardHeader>
                   <CardTitle className="text-xl">
-                    Question: "{questionInput}" ({solvedCount}/{checkResults.length} solved)
+                    Question: &quot;{questionInput}&quot; ({solvedCount}/{checkResults.length} solved)
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
